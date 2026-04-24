@@ -253,4 +253,4 @@ The parser uses a scoring system rather than a simple regex:
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
