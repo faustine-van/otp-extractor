@@ -1,0 +1,55 @@
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 7px rgba(0, 230, 118, 0);
+  }
+}
+
+@keyframes radar-ring {
+  0%   { transform: scale(0.25); opacity: 1; }
+  100% { transform: scale(2.4);  opacity: 0; }
+}
+
+@keyframes sweep {
+  from { transform: rotate(-90deg); }
+  to   { transform: rotate(270deg); }
+}
+
+@keyframes slide-up-fade {
+  from { transform: translateY(14px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes float-in {
+  from { transform: translateY(8px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0)   scale(1);    opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); }
+  50%       { box-shadow: 0 0 35px rgba(108, 99, 255, 0.6); }
+}
+
+.popup-enter { animation: float-in 0.32s ease-out both; }
+.pulse-dot   { animation: pulse-dot 1.8s ease-in-out infinite; }
+.radar-ring  { animation: radar-ring 2.8s ease-out infinite; }
+.radar-ring-2 { animation: radar-ring 2.8s ease-out infinite 0.93s; }
+.radar-ring-3 { animation: radar-ring 2.8s ease-out infinite 1.87s; }
+.sweep-arm   { animation: sweep 3s linear infinite; transform-origin: 50% 50%; }
+
+.card-enter-1 { animation: slide-up-fade 0.38s ease-out 0.00s both; }
+.card-enter-2 { animation: slide-up-fade 0.38s ease-out 0.09s both; }
+.card-enter-3 { animation: slide-up-fade 0.38s ease-out 0.18s both; }
+.card-enter-4 { animation: slide-up-fade 0.38s ease-out 0.27s both; }
+.card-enter-5 { animation: slide-up-fade 0.38s ease-out 0.36s both; }

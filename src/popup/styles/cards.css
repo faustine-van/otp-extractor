@@ -1,0 +1,110 @@
+.detection-list {
+  padding: 0 12px 12px;
+  max-height: 360px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detection-card {
+  border-radius: 8px;
+  padding: 11px 13px;
+  transition: background-color 0.18s ease;
+  cursor: default;
+}
+
+.detection-card.otp {
+  background: #1e1e35;
+  border-left: 3px solid #6c63ff;
+}
+
+.detection-card.otp:hover { background: #252542; }
+
+.detection-card.link {
+  background: #1e1e35;
+  border-left: 3px solid #00bcd4;
+}
+
+.detection-card.link:hover { background: #252542; }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+}
+
+.card-badge.otp {
+  background: rgba(108, 99, 255, 0.15);
+  border: 1px solid rgba(108, 99, 255, 0.35);
+  color: #6c63ff;
+}
+
+.card-badge.link {
+  background: rgba(0, 188, 212, 0.15);
+  border: 1px solid rgba(0, 188, 212, 0.35);
+  color: #00bcd4;
+}
+
+.card-time {
+  font-size: 10px;
+  color: #5a5a80;
+}
+
+.card-otp-value {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  margin-bottom: 7px;
+  background: linear-gradient(90deg, #ffffff 0%, #a78bfa 40%, #ffffff 60%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.card-link-value {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  color: #00bcd4;
+  margin-bottom: 7px;
+  word-break: break-all;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-sender {
+  font-size: 10px;
+  color: #5a5a80;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+}
+
+.card-sender.link { max-width: 120px; }
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
