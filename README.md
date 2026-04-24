@@ -25,6 +25,20 @@ This project reflects my approach to building—starting from everyday problems 
 - Works silently in the background — even when the popup is closed
 
 ---
+## 📸 Screenshots
+
+<p align="center">
+  <img src="./assets/screenshots/not-connected.png" width="300" />
+</p>
+
+<p align="center">
+  <img src="./assets/screenshots/monitoring.png" width="300" />
+</p>
+
+<p align="center">
+  <img src="./assets/screenshots/detection.png" width="300" />
+</p>
+---
 
 ## Tech Stack
 

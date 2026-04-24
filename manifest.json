@@ -5,7 +5,7 @@
   "description": "Extracts OTP codes and verification links from Gmail",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuCyMREtbyEG0RK+NBKFZwXC0WGFj5ABmb8SogieFQ+2z0TDd06ndevvJ45/EFlAssvIj9IA/e3o8RiSNv6fi7rOCJ6mavALlNlLucr2KD4QrIlfkfUo9DZbpc0+2JSL71avO+2uj8tf5yN8mUXxxNpRit3Tmke8s8OhHkrJ5BzVYMY9DA+FtyKOA89d9yViM5yCp6C2zJvt47nL2E7g8kuMxqhy12GGsj7EwJaXi5vgpoiKhAUV909xfqoqTg5j/QUl844KEfLfxN7a6TdkgHmW5B7p3LNYv1M8Wl26iCY4+nAhGDDUf1ZPnEtmtLpOOMplauwQQ5+vAxpBjHzBakwIDAQAB",
   "oauth2": {
-    "client_id": "YOUR_CLIENT_ID_HERE.apps.googleusercontent.com",
+    "client_id": "269271595279-su3n8lllc70uqvik5rfqe6ihis30cttr.apps.googleusercontent.com",
     "scopes": [
       "https://www.googleapis.com/auth/gmail.readonly"
     ]
