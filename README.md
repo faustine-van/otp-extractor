@@ -25,7 +25,7 @@ This project reflects my approach to building—starting from everyday problems 
 - Works silently in the background — even when the popup is closed
 
 ---
-## 📸 Screenshots
+## Screenshots
 
 <p align="center">
   <img src="./assets/screenshots/not-connected.png" width="300" />
@@ -267,4 +267,4 @@ The parser uses a scoring system rather than a simple regex:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](./LICENSE).
