@@ -5,7 +5,7 @@ import "./styles/animations.css";
 import "./styles/layout.css";
 import "./styles/buttons.css";
 import { getStorage, clearDetections } from "../utils/storage";
-import { getAuthToken, removeAuthToken, isAuthenticated } from "../auth/auth";
+import { login, removeAuthToken, isAuthenticated } from "../auth/auth";
 import { Header } from "./components/Header";
 import { StatusBar } from "./components/StatusBar";
 import "./styles/animations.css";
@@ -48,18 +48,18 @@ useEffect(() => {
   return () => chrome.storage.onChanged.removeListener(listener);
 }, []);
 
-  const handleLogin = useCallback(async () => {
-    setLoading(true);
-    try {
-      await getAuthToken();
-      setAuthenticated(true);
-      const storage = await getStorage();
-      setDetections(storage.detections);
-    } catch (err) {
-      console.error("Login failed:", err);
-    }
-    setLoading(false);
-  }, []);
+ const handleLogin = useCallback(async () => {
+  setLoading(true);
+  try {
+    await login();
+    setAuthenticated(true);
+    const storage = await getStorage();
+    setDetections(storage.detections);
+  } catch (err) {
+    console.error("Login failed:", err);
+  }
+  setLoading(false);
+}, []);
 
   const handleLogout = useCallback(async () => {
     setLoading(true);

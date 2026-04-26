@@ -14,7 +14,7 @@ async function fetchToken(interactive: boolean): Promise<string | null> {
   });
 }
 
-async function removeToken(token: string): Promise<void> {
+async function revokeToken(token: string): Promise<void> {
   cachedToken    = null;
   cacheExpiresAt = 0;
   return new Promise(resolve => {
@@ -23,10 +23,28 @@ async function removeToken(token: string): Promise<void> {
 }
 
 async function validateToken(token: string): Promise<boolean> {
-  const res = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${token}`
-  );
-  return res.ok;
+  try {
+    const res = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${token}`
+    );
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function getLoggedOutFlag(): Promise<boolean> {
+  return new Promise(resolve => {
+    chrome.storage.local.get("userLoggedOut", (result: Record<string, boolean>) => {
+      resolve(result["userLoggedOut"] ?? false);
+    });
+  });
+}
+
+async function setLoggedOutFlag(value: boolean): Promise<void> {
+  return new Promise(resolve => {
+    chrome.storage.local.set({ userLoggedOut: value }, resolve);
+  });
 }
 
 export async function getAuthToken(): Promise<string> {
@@ -35,7 +53,6 @@ export async function getAuthToken(): Promise<string> {
   }
 
   const existing = await fetchToken(false);
-
   if (existing) {
     const valid = await validateToken(existing);
     if (valid) {
@@ -43,7 +60,7 @@ export async function getAuthToken(): Promise<string> {
       cacheExpiresAt = Date.now() + TOKEN_CACHE_MS;
       return existing;
     }
-    await removeToken(existing);
+    await revokeToken(existing);
   }
 
   const fresh = await fetchToken(true);
@@ -55,19 +72,31 @@ export async function getAuthToken(): Promise<string> {
 }
 
 export async function removeAuthToken(token: string): Promise<void> {
-  return removeToken(token);
+  cachedToken    = null;
+  cacheExpiresAt = 0;
+  await setLoggedOutFlag(true);
+  await revokeToken(token);
 }
 
 export async function isAuthenticated(): Promise<boolean> {
+  // Respect explicit logout — don't silently re-auth
+  const loggedOut = await getLoggedOutFlag();
+  if (loggedOut) return false;
+
   if (cachedToken && Date.now() < cacheExpiresAt) return true;
 
   const token = await fetchToken(false);
   if (!token) return false;
 
   const valid = await validateToken(token);
-  if (!valid) { await removeToken(token); return false; }
+  if (!valid) { await revokeToken(token); return false; }
 
   cachedToken    = token;
   cacheExpiresAt = Date.now() + TOKEN_CACHE_MS;
   return true;
+}
+
+export async function login(): Promise<string> {
+  await setLoggedOutFlag(false);
+  return getAuthToken();
 }
