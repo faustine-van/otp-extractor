@@ -11,7 +11,6 @@ const OTP_SELECTORS = [
   'input[placeholder*="verify" i]',
   'input[placeholder*="one-time" i]',
   'input[autocomplete="one-time-code"]',
-  'input[type="number"]',
 ];
 
 function findOTPInput(): HTMLInputElement | null {

@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import type { Detection } from "../types";
-import "./styles/animations.css";
-import "./styles/layout.css";
-import "./styles/buttons.css";
 import { getStorage, clearDetections } from "../utils/storage";
 import { login, removeAuthToken, isAuthenticated } from "../auth/auth";
 import { Header } from "./components/Header";
@@ -61,19 +58,19 @@ useEffect(() => {
   setLoading(false);
 }, []);
 
-  const handleLogout = useCallback(async () => {
-    setLoading(true);
-    try {
-      const storage = await getStorage();
-      if (storage.accessToken) await removeAuthToken(storage.accessToken);
-      setAuthenticated(false);
-      setDetections([]);
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-    setLoading(false);
-  }, []);
+const handleLogout = useCallback(async () => {
+  setLoading(true);
+  try {
+    await removeAuthToken();
+    setAuthenticated(false);
+    setDetections([]);
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
+  setLoading(false);
+}, []);
 
+  
   const handleCopy = useCallback((id: string, value: string) => {
     navigator.clipboard.writeText(value).catch(() => { });
     setCopiedId(id);

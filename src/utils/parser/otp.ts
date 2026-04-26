@@ -10,13 +10,18 @@ const OTP_KEYWORDS = [
   "2fa", "two-factor", "two factor",
 ];
 
-function score(num: string, numIdx: number, text: string, kwIdx: number): number {
-  if (isYear(num))                        return -1;
-  if (isInsideURL(num, text))             return -1;
-  if (isPhoneFragment(num, text))         return -1;
+function score(
+  num: string,
+  numIdx: number,
+  text: string,
+  kwIdx: number
+): number {
+  if (isYear(num))                          return -1;
+  if (isInsideURL(num, text))               return -1;
+  if (isPhoneFragment(num, text, numIdx))   return -1;
 
   const around = text.slice(Math.max(0, numIdx - 1), numIdx + num.length + 1);
-  if (/\d{9,}/.test(around))             return -1;
+  if (/\d{9,}/.test(around))               return -1;
 
   let s = 0;
 
@@ -41,7 +46,7 @@ function score(num: string, numIdx: number, text: string, kwIdx: number): number
 }
 
 export function detectOTP(text: string): ParseResult | null {
-  const lower = text.toLowerCase();
+  const lower      = text.toLowerCase();
   const candidates: { value: string; score: number }[] = [];
 
   for (const keyword of OTP_KEYWORDS) {
@@ -53,7 +58,8 @@ export function detectOTP(text: string): ParseResult | null {
       const numRe    = /\b(\d{4,8})\b/g;
       let m;
       while ((m = numRe.exec(window)) !== null) {
-        const s = score(m[1], winStart + m.index, text, kwIdx);
+        const absIdx = winStart + m.index;
+        const s      = score(m[1], absIdx, text, kwIdx);
         if (s > 0) candidates.push({ value: m[1], score: s });
       }
       kwIdx = lower.indexOf(keyword, kwIdx + 1);
@@ -65,5 +71,9 @@ export function detectOTP(text: string): ParseResult | null {
   const best = candidates[0];
   if (best.score < 25) return null;
 
-  return { type: "otp", value: best.value, confidence: Math.min(100, best.score) };
+  return {
+    type: "otp",
+    value: best.value,
+    confidence: Math.min(100, best.score),
+  };
 }

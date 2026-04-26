@@ -1,10 +1,10 @@
 import type { Detection } from "../types";
 
-const ICON_URL = chrome.runtime.getURL("icons/icon48.png");
 
 const SKIP_PREFIXES = ["chrome://", "edge://", "chrome-extension://"];
 
 export function showNotification(detection: Detection): void {
+  const ICON_URL = chrome.runtime.getURL("icons/icon48.png");
   chrome.notifications.create({
     type: "basic",
     iconUrl: ICON_URL,

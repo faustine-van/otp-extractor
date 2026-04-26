@@ -10,7 +10,8 @@ const ALARM_NAME = "poll-gmail";
 async function getProcessedIds(): Promise<Set<string>> {
   return new Promise(resolve => {
     chrome.storage.local.get("processedIds", (result: Record<string, string[]>) => {
-      resolve(new Set(result["processedIds"] ?? []));
+      const ids = result["processedIds"];
+      resolve(new Set(Array.isArray(ids) ? ids : []));
     });
   });
 }
@@ -76,7 +77,7 @@ export async function pollGmail(): Promise<void> {
 export function setupAlarm(): void {
   chrome.alarms.get(ALARM_NAME, existing => {
     if (!existing) {
-      chrome.alarms.create(ALARM_NAME, { periodInMinutes: 0.5 });
+      chrome.alarms.create(ALARM_NAME, { periodInMinutes: 1 });
     }
   });
   chrome.alarms.onAlarm.addListener(alarm => {

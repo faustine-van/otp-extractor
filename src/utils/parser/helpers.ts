@@ -21,11 +21,9 @@ export function isYear(n: string): boolean {
   return num >= 1900 && num <= 2099;
 }
 
-export function isPhoneFragment(n: string, context: string): boolean {
-  const idx = context.indexOf(n);
-  if (idx === -1) return false;
-  const before = context[idx - 1];
-  const after  = context[idx + n.length];
+export function isPhoneFragment(n: string, context: string, numIdx: number): boolean {
+  const before = context[numIdx - 1];
+  const after  = context[numIdx + n.length];
   return before === "-" || before === "." || after === "-" || after === ".";
 }
 
